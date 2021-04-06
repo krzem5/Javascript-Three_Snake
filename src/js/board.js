@@ -81,7 +81,6 @@ class Board{
 		return e;
 	}
 	_gen_snake(){
-		var td=[[-1,0],[0,-1],[1,0],[0,1]][parseInt(Math.random()*4)];
 		var h=[parseInt(B_WIDTH/2),parseInt(B_HEIGHT/2),null,null,null,0];
 		return [h,[h[0],h[1],null,null,null,1],[h[0],h[1],null,null,null,2]];
 	}
@@ -329,7 +328,7 @@ class Board{
 						this.bltm=setTimeout(function(){
 							ths.pt_el.classList.remove("bl");
 							ths.bltm=null;
-						},450)
+						},450);
 					}
 				}
 			}

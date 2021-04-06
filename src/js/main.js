@@ -9,8 +9,7 @@ function init(){
 	renderer.setSize(window.innerWidth,window.innerHeight);
 	scene.background=new THREE.Color(0.05,0.05,0.05);
 	document.body.appendChild(renderer.domElement);
-	ambient=new THREE.AmbientLight(0xffffff,1);
-	scene.add(ambient);
+	scene.add(new THREE.AmbientLight(0xffffff,1));
 	renderer.render(scene,cam);
 	window.addEventListener("resize",resize,false);
 	document.body.addEventListener("keydown",onkeypress);
@@ -50,7 +49,6 @@ window.ondeviceorientation=function(e){
 		return;
 	}
 	var BF=10;
-	var FBF=20;
 	var bt=e.beta+0;
 	if (e.gamma>0){
 		bt=(180-Math.abs(e.beta))*(e.beta<0?-1:1);
