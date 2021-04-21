@@ -6,15 +6,12 @@ import sys
 
 
 
-global SCORES
-SCORES={}
 with open("score-data.json","r") as f:
 	SCORES=json.loads(f.read())
 
 
 
 def save():
-	global SCORES
 	with open("score-data.json","w") as f:
 		f.write(json.dumps(SCORES,indent=4,sort_keys=True).replace("    ","\t"))
 
@@ -27,7 +24,6 @@ class Client(SimpleHTTPRequestHandler):
 
 
 	def do_SCOREGET(self):
-		global SCORES
 		if (self.headers["X-Forwarded-For"] not in SCORES.keys()):
 			SCORES[self.headers["X-Forwarded-For"]]=-1
 		enc=str(SCORES[self.headers["X-Forwarded-For"]]).encode(sys.getfilesystemencoding(),"surrogateescape")
@@ -44,7 +40,6 @@ class Client(SimpleHTTPRequestHandler):
 
 
 	def do_SCOREUPDATE(self):
-		global SCORES
 		SCORES[self.headers["X-Forwarded-For"]]=max(SCORES[self.headers["X-Forwarded-For"]],int(self.path[1:]))
 		save()
 		scp=1
